@@ -4,7 +4,8 @@ lSystem.nextIteration = function(startString, rules)
   local endString = ""
 
   for i=1, #startString do
-    local currchar = startString:sub(i,i)
+    local currChar = startString:sub(i,i)
+    local found = false
 
     for j=1, #rules do
       if rules[j][1] == currChar then
@@ -24,7 +25,7 @@ lSystem.iterate = function(startString, rules, times)
   local outString
 
   for i=1, times do
-    outString = lSystem.nextIteration(outstring or startString, rules)
+    outString = lSystem.nextIteration(outString or startString, rules)
   end
 
   return outString
