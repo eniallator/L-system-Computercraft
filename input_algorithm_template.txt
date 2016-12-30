@@ -1,0 +1,20 @@
+- Comments will have "--" in front of them that will tell the interpreter that it's a comment and not part of the algorithm
+- Order of the following shouldn't matter, as long as at least one of each is there
+- Error messages should be intuitive to figure out what went wrong
+-
+- List of functions that characters can be:
+-
+- rotate: parameter in degrees and is from -180 to 180
+- forward: parameter distance forward in blocks
+- forwardNoPlace: same as forward function but does not place blocks above the turtle
+- save: save the current rotation/position
+- load: loads the last rotation/position
+
+----------- TEMPLATE -----------
+
+start_string "*insert initial starting string here*"
+
+rule "*insert character to look for here*" -> "*insert output characters here*"
+-- line above can be repeated as many times as you like
+
+function "*insert character here*" *insert function name here*()
