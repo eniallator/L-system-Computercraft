@@ -1,5 +1,5 @@
-local lSystem = dofile("lSystem.lua")
-local doTurtle = dofile("doTurtle.lua")
+local lSystem = dofile("lib/lSystem.lua")
+local doTurtle = dofile("lib/doTurtle.lua")
 local iterateTimes = { ... }
 
 -- Variables for Koch curve
@@ -15,7 +15,7 @@ local funcs = {
       doTurtle.placeUp()
     end
   end,
-  
+
   ["+"] = turtle.left,
   ["-"] = turtle.right
 }
