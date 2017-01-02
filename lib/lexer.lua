@@ -122,7 +122,7 @@ local function isNum(c)
 end
 
 local function tokenizeNumber(buffer)
-  if isNum(buffer.c) then
+  if isNum(buffer.c) or (buffer.c=="-" and isNum(buffer:peek())) then
     local strN = buffer.c
     while buffer:hasNext() and isNum(buffer:next()) do
       strN = strN .. buffer.c

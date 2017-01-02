@@ -43,7 +43,10 @@ end
 
 local turtleInstructions = {
   forward = true,
-  rotate = true
+  forwardNoPlace = true,
+  rotate = true,
+  save = true,
+  load = true
 }
 local function consumeTurtleInstruction(nxt, tList, form)
   local s, instr
