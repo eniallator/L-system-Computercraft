@@ -15,8 +15,8 @@ local function selectNextItem()
 end
 
 doTurtle.placeUp = function()
-  while not selectNextItem() do end
-  while not turtle.placeup() do end
+  while not selectNextItem() do sleep(5) print("Out of blocks!") end
+  while not turtle.placeUp() and not turtle.detectUp() do end
 end
 
 doTurtle.forward = function()
