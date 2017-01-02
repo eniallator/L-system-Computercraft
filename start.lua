@@ -2,19 +2,23 @@ local lSystem = dofile("lib/lSystem.lua")
 local funcList = dofile("lib/funcList.lua")
 local iterateTimes = { ... }
 
--- Variables for Koch curve
-local startString = "f"
+local startString = "X"
 local rules = {
   {
-    "f",
-    "f+f-f-f+f"
+    "X",
+    "F-[[X]+X]+F[+FX]-X"
+  },{
+    "F",
+    "FF"
   }
 }
 
 local funcs = {
-  ["f"] = {funcList.forward, 2},
-  ["+"] = {funcList.rotate, -90},
-  ["-"] = {funcList.rotate, 90}
+  ["F"] = {funcList.forward, 4},
+  ["-"] = {funcList.rotate, -25},
+  ["+"] = {funcList.rotate, 25},
+  ["["] = {funcList.save},
+  ["]"] = {funcList.load}
 }
 
 local outString = lSystem.iterate(startString, rules, iterateTimes[1])

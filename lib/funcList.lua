@@ -58,43 +58,29 @@ end
 local function nextPos()
   local xDiff = exactNextPosition.x - currPosition.x
   local yDiff = exactNextPosition.y - currPosition.y
+  local roundedX = math.floor(xDiff + 0.5)
+  local roundedY = math.floor(yDiff + 0.5)
 
   if xDiff >= 0.5 then
     faceDir("posX")
-
-    while xDiff >= 0.5 do
-      goForward(xDiff)
-      currPosition.x = currPosition.x + 1
-      xDiff = exactNextPosition.x - currPosition.x
-    end
+    goForward(xDiff)
+    currPosition.x = currPosition.x + roundedX
 
   elseif xDiff <= -0.5 then
     faceDir("negX")
-
-    while xDiff <= -0.5 do
-      goForward(math.abs(xDiff))
-      currPosition.x = currPosition.x - 1
-      xDiff = exactNextPosition.x - currPosition.x
-    end
+    goForward(math.abs(xDiff))
+    currPosition.x = currPosition.x + roundedX
   end
 
   if yDiff >= 0.5 then
     faceDir("posY")
-
-    while yDiff >= 0.5 do
-      goForward(yDiff)
-      currPosition.y = currPosition.y + 1
-      yDiff = exactNextPosition.y - currPosition.y
-    end
+    goForward(yDiff)
+    currPosition.y = currPosition.y + roundedY
 
   elseif yDiff <= -0.5 then
     faceDir("negY")
-
-    while yDiff <= -0.5 do
-      goForward(math.abs(yDiff))
-      currPosition.y = currPosition.y - 1
-      yDiff = exactNextPosition.y - currPosition.y
-    end
+    goForward(math.abs(yDiff))
+    currPosition.y = currPosition.y + roundedY
   end
 end
 
@@ -121,17 +107,20 @@ funcList.save = function()
   table.insert(saves, {
     rotation = currRotation,
     position = {
-      currPosition.x,
-      currPosition.y
+      x = exactNextPosition.x,
+      y = exactNextPosition.y
     }
   })
 end
 
 funcList.load = function()
   local lastSave = saves[#saves]
+  -- print(#saves,"\n",textutils.serialise(saves))
 
   currRotation = lastSave.rotation
-  goToPos(lastSave.position)
+  exactNextPosition.x = lastSave.position.x
+  exactNextPosition.y = lastSave.position.y
+  nextPos()
 
   table.remove(saves, #saves)
 end
