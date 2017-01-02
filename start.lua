@@ -34,6 +34,8 @@ local outString = lSystem.iterate(outline.ss, outline.rules, iterateTimes)
 
 for i=1, #outString do
   local currChar = outString:sub(i, i)
+  local _,y = term.getCursorPos()
+  term.setCursorPos(1, y)
   term.write("Carried out [" .. i .. "/" .. #outString .. "] instructions")
 
   local cFunc
@@ -42,7 +44,10 @@ for i=1, #outString do
       for j=1, #outline.funcs[i][2] do
         funcList[outline.funcs[i][2][j][1]](unpack(outline.funcs[i][2][j][2]))
       end
+
       break
     end
   end
 end
+
+print()
