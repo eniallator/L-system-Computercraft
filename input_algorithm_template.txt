@@ -18,3 +18,5 @@ rule "*insert character to look for here*" -> "*insert output characters here*"
 -- line above can be repeated as many times as you like
 
 function "*insert character here*" *insert function name here*()
+-- you can also have multiple functions assigned to a character if you wrap them in {}
+-- for example: 'function "a" {forward(2) rotate(90) forward(1)}'
