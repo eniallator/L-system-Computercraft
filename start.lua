@@ -31,10 +31,10 @@ local tokenList = lexer.lex(data)
 local outline = parser.parse(tokenList)
 
 local outString = lSystem.iterate(outline.ss, outline.rules, iterateTimes)
-print(outString)
 
 for i=1, #outString do
   local currChar = outString:sub(i, i)
+  term.write("Carried out [" .. i .. "/" .. #outString .. "] instructions")
 
   local cFunc
   for i=1, #outline.funcs do
