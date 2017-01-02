@@ -22,10 +22,10 @@ local funcs = {
 }
 
 local outString = lSystem.iterate(startString, rules, iterateTimes[1])
-print(outString)
 
 for i=1, #outString do
   local currChar = outString:sub(i, i)
+  term.write("Carried out [" .. i .. "/" .. #outString .. "] instructions")
 
   if funcs[currChar] then
     funcs[currChar][1](funcs[currChar][2])
