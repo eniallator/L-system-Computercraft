@@ -113,7 +113,8 @@ local function tokenizeSymbol(buffer)
 end
 
 local startNum = 48
-local function isNum(c)
+local function isNum(c, f)
+  if c == "." and not f then return true end
   local b = strByte(c)
   if b >= startNum and b < startNum + 10 then
     --WOO ITS A NUMBER (or at least part of one)
@@ -122,10 +123,13 @@ local function isNum(c)
 end
 
 local function tokenizeNumber(buffer)
-  if isNum(buffer.c) or (buffer.c=="-" and isNum(buffer:peek())) then
+  if isNum(buffer.c, true) or (buffer.c=="-" and isNum(buffer:peek(), true)) then
     local strN = buffer.c
     while buffer:hasNext() and isNum(buffer:next()) do
       strN = strN .. buffer.c
+      if buffer.c == "." and buffer:peek() == "." then
+        lexer.exception("Multiple points "..buffer.ln..":"..buffer.cr)
+      end
     end
     if not tonumber(strN) then
       lexer.exception("NaN: "..strN)

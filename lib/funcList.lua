@@ -58,8 +58,8 @@ end
 local function nextPos()
   local xDiff = exactNextPosition.x - currPosition.x
   local yDiff = exactNextPosition.y - currPosition.y
-  local roundedX = math.floor(xDiff + 0.5)
-  local roundedY = math.floor(yDiff + 0.5)
+  local roundedX = math.floor(math.abs(xDiff) + 0.5) * (xDiff < 0 and -1 or 1)
+  local roundedY = math.floor(math.abs(yDiff) + 0.5) * (yDiff < 0 and -1 or 1)
 
   if xDiff >= 0.5 then
     faceDir("posX")
