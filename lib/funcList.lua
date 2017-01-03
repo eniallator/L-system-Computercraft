@@ -29,8 +29,8 @@ local function turnRight()
 end
 
 local function updatePosData()
-  exactNextPosition.x = exactNextPosition.x + math.cos(math.rad(currRotation))
-  exactNextPosition.y = exactNextPosition.y + math.sin(math.rad(currRotation))
+  exactNextPosition.x = exactNextPosition.x + math.sin(math.rad(currRotation))
+  exactNextPosition.y = exactNextPosition.y + math.cos(math.rad(currRotation))
 end
 
 local function goForward(times)
@@ -115,7 +115,6 @@ end
 
 funcList.load = function()
   local lastSave = saves[#saves]
-  -- print(#saves,"\n",textutils.serialise(saves))
 
   currRotation = lastSave.rotation
   exactNextPosition.x = lastSave.position.x
