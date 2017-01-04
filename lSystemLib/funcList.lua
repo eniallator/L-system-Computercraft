@@ -1,4 +1,4 @@
-local doTurtle = dofile("lib/doTurtle.lua")
+local doTurtle = dofile("lSystemLib/doTurtle.lua")
 
 local funcList = {}
 

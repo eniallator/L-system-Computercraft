@@ -1,10 +1,10 @@
 helpListLength = 5
 
-local algorithm = dofile("lib/algorithm.lua")
-local funcList = dofile("lib/funcList.lua")
-local lexer = dofile("lib/lexer.lua")
-local parser = dofile("lib/parser.lua")
-local algorithmExamples = dofile("lib/algorithmExamples.lua")
+local algorithm = dofile("lSystemLib/algorithm.lua")
+local funcList = dofile("lSystemLib/funcList.lua")
+local lexer = dofile("lSystemLib/lexer.lua")
+local parser = dofile("lSystemLib/parser.lua")
+local algorithmExamples = dofile("lSystemLib/algorithmExamples.lua")
 
 local args = { ... }
 local progName = shell and shell.getRunningProgram() or "lsystem"

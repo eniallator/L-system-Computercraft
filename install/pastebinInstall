@@ -1,0 +1,47 @@
+local repoUrl = "https://raw.githubusercontent.com/eniallator/L-system-Computercraft/master/"
+local filesToInstall = {}
+local fileListUrl = "install/filesToInstall"
+local installDir = "lSystemLib"
+
+if not http then
+  printError("http needs to be enabled.")
+  return
+end
+
+if fs.exists(installDir) then
+  printError("Install directory " .. installDir .. " already exists. Can't install.")
+  return
+  
+else
+  fs.makeDir(installDir)
+end
+
+local fileListHandle = http.get(repoUrl .. fileListUrl)
+local line = fileListHandle.readLine()
+
+while line do
+  table.insert(filesToInstall, line)
+  line = fileListHandle.readLine()
+end
+
+fileListHandle.close()
+print("Found install files.")
+
+for i=1, #filesToInstall do
+  local currFile = filesToInstall[i]
+  local githubHandle = http.get(repoUrl .. currFile)
+
+  if not githubHandle then
+    printError("Stuck at " .. currFile .. " please report to https://github.com/eniallator/L-system-Computercraft/issues")
+    return
+  end
+
+  local currFileContents = githubHandle.read()
+  githubHandle.close()
+
+  local locFileHandle = fs.open(currFile, "w")
+  locFileHandle.write(currFileContents)
+  locFileHandle.close()
+
+  print("Successfully installed: " .. currFile)
+end
