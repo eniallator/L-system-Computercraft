@@ -11,7 +11,7 @@ end
 if fs.exists(installDir) then
   printError("Install directory " .. installDir .. " already exists. Can't install.")
   return
-  
+
 else
   fs.makeDir(installDir)
 end
@@ -36,12 +36,12 @@ for i=1, #filesToInstall do
     return
   end
 
-  local currFileContents = githubHandle.read()
+  local currFileContents = githubHandle.readAll()
   githubHandle.close()
 
   local locFileHandle = fs.open(currFile, "w")
   locFileHandle.write(currFileContents)
   locFileHandle.close()
 
-  print("Successfully installed: " .. currFile)
+  print("Got: " .. currFile)
 end
