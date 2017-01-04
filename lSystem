@@ -1,6 +1,6 @@
 helpListLength = 5
 
-local lSystem = dofile("lib/lSystem.lua")
+local algorithm = dofile("lib/algorithm.lua")
 local funcList = dofile("lib/funcList.lua")
 local lexer = dofile("lib/lexer.lua")
 local parser = dofile("lib/parser.lua")
@@ -72,7 +72,7 @@ end
 local tokenList = lexer.lex(data)
 local outline = parser.parse(tokenList)
 
-local outString = lSystem.iterate(outline.ss, outline.rules, iterateTimes)
+local outString = algorithm.iterate(outline.ss, outline.rules, iterateTimes)
 
 for i=1, #outString do
   local currChar = outString:sub(i, i)

@@ -1,6 +1,6 @@
-local lSystem = {}
+local algorithm = {}
 
-lSystem.nextIteration = function(startString, rules)
+algorithm.nextIteration = function(startString, rules)
   local endString = ""
 
   for i=1, #startString do
@@ -21,14 +21,14 @@ lSystem.nextIteration = function(startString, rules)
   return endString
 end
 
-lSystem.iterate = function(startString, rules, times)
+algorithm.iterate = function(startString, rules, times)
   local outString
 
   for i=1, times do
-    outString = lSystem.nextIteration(outString or startString, rules)
+    outString = algorithm.nextIteration(outString or startString, rules)
   end
 
   return outString
 end
 
-return lSystem
+return algorithm
