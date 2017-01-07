@@ -4,4 +4,4 @@ rule "a" -> "ab"
 rule "b" -> "a"
 
 function "a" forward(2)
-function "b" rotate(90)
+function "b" {rotate(90), forward(2)}
