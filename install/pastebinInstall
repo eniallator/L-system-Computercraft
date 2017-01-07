@@ -1,31 +1,67 @@
 local repoUrl = "https://raw.githubusercontent.com/eniallator/L-system-Computercraft/master/"
 local filesToInstall = {}
 local fileListUrl = "install/filesToInstall"
-local installDir = "lSystemLib"
 
 if not http then
   printError("http needs to be enabled.")
   return
 end
 
-if fs.exists(installDir) then
-  printError("Install directory " .. installDir .. " already exists. Can't install.")
-  return
-
-else
-  fs.makeDir(installDir)
-end
-
 local fileListHandle = http.get(repoUrl .. fileListUrl)
 local line = fileListHandle.readLine()
+local existingFiles = {}
+local installPaths = {}
 
 while line do
+  local pathString = ""
+  local finalPath = ""
+
+  for word in line:gmatch("[^/]+") do
+    pathString = pathString == "" and word or pathString .. "/" .. word
+    table.insert(installPaths, {pathString, pathString == line and "file" or "folder"})
+
+    if fs.exists(pathString) then
+      finalPath = pathString
+    end
+  end
+
+  if #finalPath > 0 then
+    table.insert(existingFiles, finalPath)
+  end
+
   table.insert(filesToInstall, line)
   line = fileListHandle.readLine()
 end
 
 fileListHandle.close()
 print("Found install files.")
+
+if existingFiles[1] then
+  print("The following paths already exist:")
+
+  for i=1, #existingFiles do
+    print(existingFiles[i])
+  end
+
+  print("Force install?")
+  local ans
+
+  repeat
+    term.write("(y/n): ")
+    ans = read():lower()
+  until ans == "y" or ans == "n"
+
+  if ans == "n" then
+    print("Exiting installer.")
+    return
+  end
+end
+
+for i=1, #installPaths do
+  if not fs.exists(installPaths[i][1]) and installPaths[i][2] == "folder" then
+    fs.makeDir(installPaths[i][1])
+  end
+end
 
 for i=1, #filesToInstall do
   local currFile = filesToInstall[i]

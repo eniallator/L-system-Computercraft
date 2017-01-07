@@ -43,8 +43,6 @@ if args[1] == "--example" then
     data = algorithmExamples[math.ceil(args[2] / helpListLength)][args[2] % helpListLength].code
     iterateTimes = args[3]
 
-    print(data, iterateTimes)
-
   else
     printError("Syntax: " .. progName .. " --example <exampleIndex> <iterateTimes>")
     return
@@ -73,6 +71,7 @@ local tokenList = lexer.lex(data)
 local outline = parser.parse(tokenList)
 
 local outString = algorithm.iterate(outline.ss, outline.rules, iterateTimes)
+print("outString")
 
 for i=1, #outString do
   local currChar = outString:sub(i, i)
