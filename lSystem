@@ -71,7 +71,7 @@ local tokenList = lexer.lex(data)
 local outline = parser.parse(tokenList)
 
 local outString = algorithm.iterate(outline.ss, outline.rules, iterateTimes)
-print("outString")
+print(outString)
 
 for i=1, #outString do
   local currChar = outString:sub(i, i)
