@@ -3,5 +3,6 @@ start_string "a"
 rule "a" -> "ab"
 rule "b" -> "a"
 
+-- Example of a comment
 function "a" forward(2)
 function "b" {rotate(90), forward(2)}
