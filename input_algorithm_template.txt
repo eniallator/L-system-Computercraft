@@ -1,6 +1,6 @@
 - Comments will have "--" in front of them that will tell the interpreter that it's a comment and not part of the algorithm
-- Order of the following shouldn't matter, as long as at least one of each is there
-- Error messages should be intuitive to figure out what went wrong
+- Order of the instructions doesn't matter, as long as 1 of: start_string, rule, and function is present
+- Error messages should be intuitive and easily understood
 -
 - List of functions that characters can be:
 -
